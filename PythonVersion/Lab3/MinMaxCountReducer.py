@@ -18,24 +18,21 @@ for line in sys.stdin:
     line=line.strip()    
     try:
         month, delay=line.split('\t')
-    delay=float(delay)
+        delay=float(delay)
     except ValueError:
         #Conversion failed
         continue
     
-    #because hadoop sort it...
+    #Because hadoop sort it...
+    #We can modify the current working record
     if current_month==month:
-        current_count+=1
-        current_max=max(delay,current_max)
-        current_min=min(delay,current_min)
+        current_min,current_max,current_count=min(delay,current_min),max(delay,current_max),current_count+1
+    #or start a new month record and output current working record        
     else:
         if current_month:
             print '%s\t%s\t%s\t%s' % (current_month, current_min, current_max, current_count)
-        current_count=1
+        current_min,current_max,current_count=delay,delay,1
         current_month=month
-        current_min=delay
-        current_max=delay
-#end of for    
-#out put the last month
+#out put the last record
 if current_month==month:
     print '%s\t%s\t%s\t%s' % (current_month, current_min, current_max, current_count)
