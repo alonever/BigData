@@ -12,6 +12,6 @@ for line in sys.stdin:
     line=line.strip()
     #split it
     for data in csv.reader([line]):
-    if data.__len__()==27:
-	    #output month and delaytime
-	    print '%s\t%s' % (data[2],data[20])
+        if data.__len__()==27:
+        #output month and delaytime
+            print '%s\t%s' % (data[2],data[20])
