@@ -17,9 +17,8 @@ wanted = ["\"Year\"", "\"Quarter\"",
 "\"Distance\""]
 with open('AllFlights.txt', 'wb') as csvOut:
     for month in range(12):
-#         print "month: {0}".format(month + 1)
         csvwriter = csv.writer(csvOut,quoting=csv.QUOTE_MINIMAL)
-        with open('../../../FlightData/On_Time_On_Time_Performance_2012_' + str(month + 1) + '.csv', 'rb') as csvIn:
+        with open('../../FlightData/On_Time_On_Time_Performance_2012_' + str(month + 1) + '.csv', 'rb') as csvIn:
             csvreader = csv.reader(csvIn)
             wantedIndex = np.zeros(wanted.__len__(), dtype="Int32")
             titleRow = np.array(csvIn.next().split(','))
@@ -28,6 +27,4 @@ with open('AllFlights.txt', 'wb') as csvOut:
             count = 0
             for row in csvreader:
                 csvwriter.writerow(np.array(row, dtype="str")[wantedIndex])
-#                 count += 1
-#                 if count % 50000 == 0:
-#                     print count
+
