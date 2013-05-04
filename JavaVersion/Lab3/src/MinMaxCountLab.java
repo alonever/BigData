@@ -22,7 +22,7 @@ public class MinMaxCountLab {
 				throws IOException, InterruptedException {
 			String[] line = value.toString().split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 			month.set(line[2]);
-			int delay = Integer.valueOf(line[20]);
+			int delay = Math.round(Float.valueOf(line[20]));
 			outTuple.setCount(1);
 			outTuple.setMax(delay);
 			outTuple.setMin(delay);
