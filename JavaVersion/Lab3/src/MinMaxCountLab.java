@@ -20,7 +20,7 @@ public class MinMaxCountLab {
 
 		public void map(Object key, Text value, Context context)
 				throws IOException, InterruptedException {
-			String[] line = value.toString().split(",");
+			String[] line = value.toString().split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 			month.set(line[2]);
 			int delay = Integer.parseInt(line[20]);
 			outTuple.setCount(1);
@@ -61,6 +61,7 @@ public class MinMaxCountLab {
 
 		Job job = new Job(conf, "MinMaxCount");
 
+		job.setJarByClass(MinMaxCountLab.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(MinMaxCountTuple.class);
 
