@@ -20,13 +20,18 @@ public class MinMaxCountLab {
 
 		public void map(Object key, Text value, Context context)
 				throws IOException, InterruptedException {
-			String[] line = value.toString().split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+			String[] line = value.toString().split(
+					",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 			month.set(line[2]);
-			int delay = Math.round(Float.valueOf(line[20]));
-			outTuple.setCount(1);
-			outTuple.setMax(delay);
-			outTuple.setMin(delay);
-			context.write(month, outTuple);
+			try {
+				int delay = Math.round(Float.parseFloat(line[20]));
+				outTuple.setCount(1);
+				outTuple.setMax(delay);
+				outTuple.setMin(delay);
+				context.write(month, outTuple);
+			} catch (NumberFormatException e) {
+				return;
+			}
 		}
 	}
 
