@@ -1,3 +1,4 @@
+#!/bin/bash
 awk 'NR>1' NASDAQ_daily_prices*.csv >> NASDAQ_full.csv
 awk -F"," '{ print $2,"\t",$3,"\t",$9 }' NASDAQ_full.csv > average.csv
 
