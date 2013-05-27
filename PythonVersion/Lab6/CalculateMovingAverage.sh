@@ -3,7 +3,7 @@ echo 'remove headers and combine seperate file into one file'
 awk 'NR>1' NASDAQ_daily_prices*.csv >> NASDAQ_full.csv
 
 echo 'remove useless columns'
-awk -F"," '{ print $2,"\t",$3,"\t",$9 }' NASDAQ_full.csv > average.csv
+awk -F"," '{ print $2,",",$3,",",$9 }' NASDAQ_full.csv > average.csv
 
 echo 'calculate moving average'
 sudo python ~/GitHub/BigData/PythonVersion/Lab6/MovingAverage.py
