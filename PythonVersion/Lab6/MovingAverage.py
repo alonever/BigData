@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 '''
 Created on May 26, 2013
 
@@ -22,7 +24,7 @@ def main():
                 sum200 = sum(price_series['stock_price_adj_close'][0:199])
                 
                 for i in range(200, len(price_series)):
-                    price = price_series['stock_price_adj_close'].irow(i)
+                    price = round(price_series['stock_price_adj_close'].irow(i),2)
                     outfile.writerow([name, price_series['date'].irow(i), round(sum50 / 50, 3), round(sum100 / 100, 3), round(sum200 / 200, 3), price])
                     sum50 = sum50 + price - price_series['stock_price_adj_close'].irow(i - 50)
                     sum100 = sum100 + price - price_series['stock_price_adj_close'].irow(i - 100)
