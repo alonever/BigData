@@ -29,9 +29,9 @@ for line in sys.stdin:
     else:
         if current_date:
             print '%s\t%s\t%s\t%s\t%s\t%s' % (current_date[0],current_date[1], 
-                                                      round(float(total_avg50)/total_count,2), 
-                                                      round(float(total_avg100)/total_count,2),
-                                                      round(float(total_avg200)/total_count,2), total_count)
+                                                      total_avg50, 
+                                                      total_avg100,
+                                                      total_avg200, total_count)
         total_avg50=int(avg50)
         total_avg100 = int(avg100)
         total_avg200 = int(avg200)
@@ -39,8 +39,8 @@ for line in sys.stdin:
         current_date=(date.year,date.month)
         
 if current_date==(date.year,date.month):
-    print '%s\t%s\t%s\t%s\t%s\t%s' % (current_date[0],current_date[1], 
-                                              round(float(total_avg50)/total_count,2), 
-                                              round(float(total_avg100)/total_count,2),
-                                              round(float(total_avg200)/total_count,2), total_count)
+            print '%s\t%s\t%s\t%s\t%s\t%s' % (current_date[0],current_date[1], 
+                                                      total_avg50, 
+                                                      total_avg100,
+                                                      total_avg200, total_count)
     
