@@ -8,39 +8,21 @@ Created on May 26, 2013
 import sys
 from datetime import datetime
 from collections import defaultdict
-current_date = None
-total_avg50 = 0
-total_avg100 = 0
-total_avg200 = 0
+dict_avg50=defaultdict(int)
+dict_avg100=defaultdict(int)
+dict_avg200=defaultdict(int)
+dict_count=defaultdict(int)
 for line in sys.stdin:
-    # trim it
-    line = line.strip()
-    # split it
-    datestring, avg50, avg100, avg200, count = line.split('\t')
-    try:
-        date=datetime.strptime(datestring.strip(), '%Y-%m-%d')
-    except:
-        print datestring
-    if current_date == (date.year,date.month):
-        total_avg50 += int(avg50)
-        total_avg100 += int(avg100)
-        total_avg200 += int(avg200)
-        total_count += int(count)
-    else:
-        if current_date:
-            print '%s\t%s\t%s\t%s\t%s\t%s' % (current_date[0],current_date[1], 
-                                                      total_avg50, 
-                                                      total_avg100,
-                                                      total_avg200, total_count)
-        total_avg50=int(avg50)
-        total_avg100 = int(avg100)
-        total_avg200 = int(avg200)
-        total_count = int(count)
-        current_date=(date.year,date.month)
-        
-if current_date==(date.year,date.month):
-            print '%s\t%s\t%s\t%s\t%s\t%s' % (current_date[0],current_date[1], 
-                                                      total_avg50, 
-                                                      total_avg100,
-                                                      total_avg200, total_count)
+    #trim it
+    line=line.strip()
+    #split it
+    datestring,avg50,avg100,avg200,count=line.split('\t')
+    date=datetime.strptime(datestring.strip(), '%Y-%m-%d')
+    dict_avg50[(date.year,date.month)]+=int(avg50)
+    dict_avg100[(date.year,date.month)]+=int(avg100)
+    dict_avg200[(date.year,date.month)]+=int(avg200)
+    dict_count[(date.year,date.month)]+=int(count)
+
+for datetuple in dict_avg50.keys():
+    print '%s\t%s\t%s\t%s\t%s\t%s' % (datetuple[0],datetuple[1], dict_avg50[datetuple], dict_avg100[datetuple], dict_avg200[datetuple],dict_count[datetuple])
     

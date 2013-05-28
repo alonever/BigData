@@ -19,7 +19,7 @@ for line in sys.stdin:
     dict_avg50[date]+=int(avg50)
     dict_avg100[date]+=int(avg100)
     dict_avg200[date]+=int(avg200)
-    dict_count[date]+=1
+    dict_count[date]+=int(count)
 
 for date in dict_avg50.keys():
     print '%s\t%s\t%s\t%s\t%s' % (date, dict_avg50[date], dict_avg100[date], dict_avg200[date],dict_count[date])
