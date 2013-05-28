@@ -1,8 +1,4 @@
 #!/bin/bash
-#Set executable
-chmod 764 *.py
-chmod 764 *.sh
-
 if [ $1 ];
 	then workpath=$1
 	else workpath=""
@@ -48,7 +44,10 @@ if [ ! -f $workpath/StockWithMovingAverage.csv ]
 			-file $workpath/StockPriceCombiner.py	-combiner $workpath/StockPriceCombiner.py \
 			-file $workpath/StockPriceReducer.py	-reducer $workpath/StockPriceReducer.py \
 			-input Lab6/StockWithMovingAverage.csv	-output Lab6-output
-	else cat $workpath/StockWithMovingAverage.csv | $workpath/StockPriceMapper.py | $workpath/StockPriceCombiner.py | sort -k1,1 | $workpath/StockPriceReducer.py > $workpath/reducer-output.txt
+			hadoop dfs -getmerge Lab6-output hadoop-output
+	else 
+		echo 'map,conbime,reduce in local mode'
+		cat $workpath/StockWithMovingAverage.csv | python $workpath/StockPriceMapper.py | python $workpath/StockPriceCombiner.py | sort -k1,1 | python $workpath/StockPriceReducer.py > $workpath/reducer-output.txt
 fi
 
 
