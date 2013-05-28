@@ -7,3 +7,8 @@ Unzip into NASDAQ/ folder under your working library
 This will unzip into a set of comma separated value files, and the larger ones (NASDAQ_daily_prices_*) contain pricing data.  The * range is {A,B, …, Z}.   
 
 The `CalculateAboveMovingAverageCount.sh` will calculate frequency of the stocks that are above their 50-100-200-day moving averages.
+
+Usage:
+On a linux machine, open terminal, type `sh CalculateAboveMovingAverageCount.sh [dir] [debug]`  
+`[dir]` your working lib like \home\user  
+`[debug]`leave blank if want to run on hadoop, type anything to run on local  
